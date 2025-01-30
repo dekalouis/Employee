@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.get("/", Controller.getAllEmployees);
 
-//! KERJAIN DULU YAAAA
 router.get("/employees/add", Controller.addEmployeeForm);
 
 router.post("/employees/add", Controller.addEmployee);
 
+//! KERJAIN DULU YAAAA
 router.get("/employees/:id", Controller.employeeDetail);
 
 router.get("/employees/:id/edit", Controller.editEmployeeForm);

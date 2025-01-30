@@ -3,24 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee - Home</title>
+    <title>Employee Details - <%= employee.name %></title>
   </head>
   <body>
-    <h1>THIS IS THE HOMEPAGE!!!!!</h1>
+    <h1>Employee Details - <%= employee.name %></h1>
     <%- include('partials/navbar') %>
-
     <table border="1px solid black">
       <tr>
         <td>Number</td>
         <td>Photo</td>
         <td>Name</td>
+        <td>Email</td>
+        <td>Phone</td>
         <td>Position</td>
         <td>Age</td>
         <td>Eductation</td>
-        <td>Action</td>
       </tr>
 
-      <% employees.forEach((employee) => {%>
       <tr>
         <td><%= employee.id%></td>
         <td>
@@ -31,15 +30,19 @@
           />
         </td>
         <td><%= employee.name%></td>
+        <td><%= employee.email%></td>
+        <td><%= employee.phone_number%></td>
         <td><%= employee.position%></td>
         <td><%= employee.age%></td>
         <td><%= employee.education%></td>
-        <td>
-          <a href="/employees/<%= employee.id%>">See Detail</a>
+      </tr>
+
+      <tr>
+        <td colspan="100%" style="text-align: center">
+          <a href="/employees/<%= employee.id%>/edit">Edit</a>
           <a href="/employees/<%= employee.id%>/delete">Delete</a>
         </td>
       </tr>
-      <% })%>
     </table>
   </body>
 </html>
