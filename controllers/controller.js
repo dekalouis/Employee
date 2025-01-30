@@ -2,18 +2,56 @@ const { Employee } = require("../models");
 
 class Controller {
   static async getAllEmployees(req, res) {
-    const employees = await Employee.findAll();
-    // res.send(employees);
-    res.render("home", { employees });
+    try {
+      const employees = await Employee.findAll();
+      // res.send(employees);
+      res.render("home", { employees });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
   }
 
   //! AYO JANGAN MALAS, KERJAKAN SATU SATU
   static async addEmployeeForm(req, res) {
-    res.send(`add employee dipencet - buat formnya`);
+    // res.send(`add employee dipencet - buat formnya`);
+    try {
+      const degrees = ["Bachelor Degree", "Master Degree"];
+      res.render("addEmployee", { degrees });
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
   }
 
   static async addEmployee(req, res) {
-    res.send(`add employee dipencet buat postnya`);
+    // res.send(`add employee dipencet buat postnya`);
+    try {
+      const {
+        name,
+        position,
+        education,
+        email,
+        phone_number,
+        profile_picture,
+        age,
+      } = req.body;
+      const newEmployee = await Employee.create({
+        name,
+        position,
+        education,
+        email,
+        phone_number,
+        profile_picture,
+        age,
+      });
+
+      // console.log(newEmployee);
+      res.redirect("/");
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
   }
 
   static async employeeDetail(req, res) {
