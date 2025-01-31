@@ -10,8 +10,22 @@
     <%- include('partials/navbar') %>
     <table border="1px solid black">
       <tr>
+        <td colspan="100%">
+          <!-- <img
+            src="<%= employee.profile_picture %>"
+            alt="employee photo"
+            style="max-width: 500px"
+          /> -->
+          <img
+            src="<%= /^https?:\/\/\S+\.\S+$/.test(employee.profile_picture) ? employee.profile_picture : 'https://cdn.vectorstock.com/i/500p/08/19/gray-photo-placeholder-icon-design-ui-vector-35850819.jpg' %>"
+            alt="employee photo"
+            style="max-width: 100px"
+          />
+        </td>
+      </tr>
+      <tr>
         <td>Number</td>
-        <td>Photo</td>
+        <!-- <td>Photo</td> -->
         <td>Name</td>
         <td>Email</td>
         <td>Phone</td>
@@ -22,13 +36,6 @@
 
       <tr>
         <td><%= employee.id%></td>
-        <td>
-          <img
-            src="<%= employee.profile_picture %>"
-            alt="employee photo"
-            style="max-width: 100px"
-          />
-        </td>
         <td><%= employee.name%></td>
         <td><%= employee.email%></td>
         <td><%= employee.phone_number%></td>

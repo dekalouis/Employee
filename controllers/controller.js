@@ -1,12 +1,20 @@
 const { Employee } = require("../models");
-const { Op, where } = require("sequelize");
+// const { Op, where } = require("sequelize");
 
 class Controller {
   static async getAllEmployees(req, res) {
     try {
-      const employees = await Employee.findAll();
+      // const employees = await Employee.findAll();
       // res.send(employees);
-      res.render("home", { employees });
+      const { name = "", age = "" } = req.query;
+
+      const employeeData = await Employee.employeeData();
+      console.log(employeeData);
+      // console.log(name, `--ini ya--`, age);
+      const employees = await Employee.filterData(name, age);
+
+      // res.render("home", { employees });
+      res.render("home", { employees, employeeData, name, age });
     } catch (error) {
       console.log(error);
       res.send(error);
@@ -47,7 +55,9 @@ class Controller {
         age,
       });
 
-      // console.log(newEmployee);
+      // console.log(newEmployee, `------ INIWOI`);
+      // console.log(newEmployee.id);
+      // res.redirect(`/employees/${newEmployee.id}`);
       res.redirect("/");
     } catch (error) {
       console.log(error);
@@ -62,6 +72,11 @@ class Controller {
       const { id } = req.params;
       // console.log(id, `------`, req.params, "INI YAA");
       const employee = await Employee.findByPk(id);
+      // const employee = await Employee.findOne({
+      //   where: {
+      //     id,
+      //   },
+      // });
 
       // res.send(employee);
       res.render("employeeDetail", { employee });

@@ -9,6 +9,30 @@
     <h1>THIS IS THE HOMEPAGE!!!!!</h1>
     <%- include('partials/navbar') %>
 
+    <!-- work on this -->
+    <form>
+      <input
+        type="text"
+        name="name"
+        placeholder="Search by name"
+        value="<%= name %>"
+      />
+      <input
+        type="number"
+        name="age"
+        placeholder="or by age"
+        value="<%= age %>"
+      />
+      <input type="submit" value="Search" />
+    </form>
+    <!-- ends here -->
+    <br />
+    <p style="background-color: lightgoldenrodyellow; padding: 10px 5px">
+      Jumlah seluruh employee adalah <%= employeeData.total%>. Untuk employee
+      tertua berumur <%=employeeData.oldest %>, serta umur yang termuda berumur
+      <%= employeeData.youngest %>.
+    </p>
+    <br />
     <table border="1px solid black">
       <tr>
         <td>Number</td>
@@ -25,7 +49,7 @@
         <td><%= employee.id%></td>
         <td>
           <img
-            src="<%= employee.profile_picture %>"
+            src="<%= /^https?:\/\/\S+\.\S+$/.test(employee.profile_picture) ? employee.profile_picture : 'https://cdn.vectorstock.com/i/500p/08/19/gray-photo-placeholder-icon-design-ui-vector-35850819.jpg' %>"
             alt="employee photo"
             style="max-width: 100px"
           />
