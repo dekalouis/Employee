@@ -9,7 +9,7 @@ class Controller {
       const { name = "", age = "" } = req.query;
 
       const employeeData = await Employee.employeeData();
-      console.log(employeeData);
+      // console.log(employeeData);
       // console.log(name, `--ini ya--`, age);
       const employees = await Employee.filterData(name, age);
 

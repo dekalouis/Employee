@@ -1,6 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
-const { Op, where } = require("sequelize");
+const { Op } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
@@ -32,10 +32,17 @@ module.exports = (sequelize, DataTypes) => {
 
     //!yang static data
     static async employeeData() {
-      const total = await Employee.count();
+      const result = await Employee.findAll({
+        attributes: [
+          [sequelize.fn("COUNT", sequelize.col("id")), "total"],
+          [sequelize.fn("MIN", sequelize.col("age")), "youngest"],
+          [sequelize.fn("MAX", sequelize.col("age")), "oldest"],
+        ],
+      });
 
-      const youngest = await Employee.min("age");
-      const oldest = await Employee.max("age");
+      // console.log(`-- gas`, result);
+      // console.log(result[0].dataValues, `harusnya ini`);
+      const { total, youngest, oldest } = result[0].dataValues;
 
       return {
         total,
