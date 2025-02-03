@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const { Op } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class Employee extends Model {
     /**
@@ -9,6 +11,44 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+    }
+
+    static async filterData(name, age) {
+      const options = {};
+      if (name || age) {
+        options.where = {};
+        if (age) {
+          options.where.age = age;
+        }
+        if (name) {
+          options.where.name = {
+            [Op.iLike]: `%${name}%`,
+          };
+        }
+      }
+      const employees = await Employee.findAll(options);
+      return employees;
+    }
+
+    //!yang static data
+    static async employeeData() {
+      const result = await Employee.findAll({
+        attributes: [
+          [sequelize.fn("COUNT", sequelize.col("id")), "total"],
+          [sequelize.fn("MIN", sequelize.col("age")), "youngest"],
+          [sequelize.fn("MAX", sequelize.col("age")), "oldest"],
+        ],
+      });
+
+      // console.log(`-- gas`, result);
+      // console.log(result[0].dataValues, `harusnya ini`);
+      const { total, youngest, oldest } = result[0].dataValues;
+
+      return {
+        total,
+        youngest,
+        oldest,
+      };
     }
   }
   Employee.init(

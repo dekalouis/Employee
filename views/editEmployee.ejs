@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Employee - <%= employee.name %></title>
+  </head>
+  <body>
+    <h1>Edit Employee - <%= employee.name %></h1>
+
+    <form action="/employees/<%= employee.id %>/edit" method="POST">
+      <div>
+        <label for="">Name</label>
+        <div>
+          <input type="text" name="name" value="<%= employee.name %>" />
+        </div>
+      </div>
+      <div>
+        <label for="">Position</label>
+        <div>
+          <input type="text" name="position" value="<%= employee.position %>" />
+        </div>
+      </div>
+      <div>
+        <label for="">Education</label>
+        <div>
+          <!-- <input type="text" name="education" /> -->
+          <select name="education" id="">
+            <!-- <option value="">Select Education</option> -->
+            <% degrees.forEach((el) => { %> <% if (el === employee.education)
+            {%>
+            <option value="<%= el %>" selected><%= el %></option>
+            <% } else { %>
+            <option value="<%= el %>"><%= el %></option>
+            <%}}) %>
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="">Email</label>
+        <div>
+          <input type="email" name="email" value="<%= employee.email %>" />
+        </div>
+      </div>
+      <div>
+        <label for="">Phone Number</label>
+        <div>
+          <input
+            type="text"
+            name="phone_number"
+            value="<%= employee.phone_number %>"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="">Profile Picture</label>
+        <div>
+          <input
+            type="text"
+            name="profile_picture"
+            value="<%= employee.profile_picture %>"
+          />
+        </div>
+      </div>
+      <div>
+        <label for="">Age</label>
+        <div>
+          <input type="number" name="age" value="<%= employee.age %>" />
+        </div>
+      </div>
+      <br />
+      <div>
+        <input type="submit" value="Submit" />
+      </div>
+    </form>
+  </body>
+</html>

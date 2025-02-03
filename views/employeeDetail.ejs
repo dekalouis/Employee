@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Details - <%= employee.name %></title>
+  </head>
+  <body>
+    <h1>Employee Details - <%= employee.name %></h1>
+    <%- include('partials/navbar') %>
+    <table border="1px solid black">
+      <tr>
+        <td colspan="100%">
+          <!-- <img
+            src="<%= employee.profile_picture %>"
+            alt="employee photo"
+            style="max-width: 500px"
+          /> -->
+          <img
+            src="<%= /^https?:\/\/\S+\.\S+$/.test(employee.profile_picture) ? employee.profile_picture : 'https://cdn.vectorstock.com/i/500p/08/19/gray-photo-placeholder-icon-design-ui-vector-35850819.jpg' %>"
+            alt="employee photo"
+            style="max-width: 100px"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>Number</td>
+        <!-- <td>Photo</td> -->
+        <td>Name</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>Position</td>
+        <td>Age</td>
+        <td>Eductation</td>
+      </tr>
+
+      <tr>
+        <td><%= employee.id%></td>
+        <td><%= employee.name%></td>
+        <td><%= employee.email%></td>
+        <td><%= employee.phone_number%></td>
+        <td><%= employee.position%></td>
+        <td><%= employee.age%></td>
+        <td><%= employee.education%></td>
+      </tr>
+
+      <tr>
+        <td colspan="100%" style="text-align: center">
+          <a href="/employees/<%= employee.id%>/edit">Edit</a>
+          <a href="/employees/<%= employee.id%>/delete">Delete</a>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
